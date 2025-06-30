@@ -118,9 +118,17 @@ async def update_movie(session: AsyncSession, movie_id: int, movie_data: MovieUp
         if field == "genre_ids":
             genres = await session.execute(select(GenreModel).where(GenreModel.id.in_(value)))
             movie.genres = genres.scalars().all()
+        elif field == "actor_ids":
+            actors = await session.execute(select(ActorModel).where(ActorModel.id.in_(value)))
+            movie.actors = actors.scalars().all()
+        elif field == "language_ids":
+            languages = await session.execute(select(LanguageModel).where(LanguageModel.id.in_(value)))
+            movie.languages = languages.scalars().all()
+        elif field == "country_id":
+            country = await session.get(CountryModel, value)
+            movie.country = country
         else:
             setattr(movie, field, value)
-
     await session.commit()
     await session.refresh(movie)
     return movie

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Path, Depends, status, Query, HTTPException, Body
+from fastapi import APIRouter, Response, Path, Depends, status, Query, HTTPException, Body
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.schemas import (
     MovieCreateSchema,
@@ -93,3 +93,4 @@ async def delete_movie_view(
     success = await delete_movie(session, movie_id)
     if not success:
         raise HTTPException(status_code=404, detail="Movie not found")
+    return Response(status_code=204)
