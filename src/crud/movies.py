@@ -101,7 +101,9 @@ async def get_movie_by_id(session: AsyncSession, movie_id: int):
         .where(MovieModel.id == movie_id)
         .options(
             selectinload(MovieModel.country),
-            selectinload(MovieModel.genres)
+            selectinload(MovieModel.genres),
+            selectinload(MovieModel.actors),
+            selectinload(MovieModel.languages),
         )
     )
     movie = result.scalars().first()

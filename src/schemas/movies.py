@@ -38,9 +38,9 @@ class MovieCreateSchema(BaseModel):
     budget: condecimal(ge=0)
     revenue: condecimal(ge=0)
     country: str
-    genres_ids: List[int]
-    actors_ids: List[int]
-    languages_ids: List[int]
+    genre_ids: List[int]
+    actor_ids: List[int]
+    language_ids: List[int]
 
     @validator("date")
     def validate_date(cls, value):
@@ -106,8 +106,8 @@ class MovieUpdateSchema(BaseModel):
     budget: Optional[float]
     revenue: Optional[float]
     country_id: Optional[int]
-    genres_ids: Optional[list[int]]
-    actors_ids: Optional[list[int]]
+    genre_ids: Optional[list[int]]
+    actor_ids: Optional[list[int]]
     language_ids: Optional[list[int]]
 
     class Config:

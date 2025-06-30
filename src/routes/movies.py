@@ -25,11 +25,9 @@ async def create_movie_view(
     movie_data: MovieCreateSchema,
     session: AsyncSession = Depends(get_async_session)
 ):
-    try:
-        movie = await create_movie(session, movie_data)
-        return movie
-    except ValueError:
-        raise HTTPException(status_code=400, detail="Invalid input data.")
+
+    movie = await create_movie(session, movie_data)
+    return movie
 
 @router.get(
     "/movies/",
